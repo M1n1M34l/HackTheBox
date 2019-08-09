@@ -3,6 +3,9 @@ Complete step by step write-ups of HackTheBox machines.
 Each one of those wirte-ups was written with great attention to detail,
 explaining each step clearly and precisley so it will be easy to understand and replicate
 the whole process.
+To unlock the active machines write-ups we'll need the root flag.
+Once a machine is retired I'll remove the password protecion.
+If you have any questions or need some clues don't hesitate to contact me over HTB or email: sonntaglior@gmail.com
 # What is HackTheBox?
 HackTheBox is an online penetration testing platform, where you can legally hack the vulnerable machines
 which try to stimulate real world scenarios in a CTF style, also you have an option to hack the offline challenges like,
